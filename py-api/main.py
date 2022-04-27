@@ -18,7 +18,6 @@ def find_file(anime_path, anime_name, episode):
 
 
 def launch_file(anime_path, anime_name, episode):
-    # anime_path='/Boruto/[Erai-raws] Boruto - Naruto Next Generations - 241 [1080p][Multiple Subtitle][7D8C4212]'
     try:
         anime = find_file(anime_path, anime_name, episode)
         
@@ -30,7 +29,6 @@ def launch_file(anime_path, anime_name, episode):
 
 
 def get_files(anime_path):
-    # anime_path='/AOT final pt2/watched'
     dir = anime_dir + anime_path
     dir_list = os.listdir(dir)
     new = {}
