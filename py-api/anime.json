@@ -1,2 +1,87 @@
 {
+    "[Erai-raws] Aharen-san wa Hakarenai": {
+        "name": "[Erai-raws] Aharen-san wa Hakarenai",
+        "path": "D:/PicturesVideos/Anime",
+        "episodes": [
+            1,
+            2,
+            3,
+            4
+        ],
+        "watched": [
+            1
+        ]
+    },
+    "[Erai-raws] Boruto - Naruto Next Generations": {
+        "name": "[Erai-raws] Boruto - Naruto Next Generations",
+        "path": "D:/PicturesVideos/Anime",
+        "episodes": [
+            242,
+            243,
+            244,
+            245,
+            246
+        ],
+        "watched": []
+    },
+    "[Erai-raws] Kaguya-sama wa Kokurasetai - Ultra Romantic": {
+        "name": "[Erai-raws] Kaguya-sama wa Kokurasetai - Ultra Romantic",
+        "path": "D:/PicturesVideos/Anime",
+        "episodes": [
+            1,
+            2,
+            3
+        ],
+        "watched": [
+            1,
+            2,
+            3
+        ]
+    },
+    "[Erai-raws] Spy x Family": {
+        "name": "[Erai-raws] Spy x Family",
+        "path": "D:/PicturesVideos/Anime",
+        "episodes": [
+            1,
+            2,
+            3
+        ],
+        "watched": [
+            1,
+            2,
+            3
+        ]
+    },
+    "[Erai-raws] Tate no Yuusha no Nariagari Season 2": {
+        "name": "[Erai-raws] Tate no Yuusha no Nariagari Season 2",
+        "path": "D:/PicturesVideos/Anime",
+        "episodes": [
+            1,
+            2,
+            3,
+            4
+        ],
+        "watched": [
+            1,
+            2,
+            3,
+            4
+        ]
+    },
+    "[Erai-raws] Tomodachi Game": {
+        "name": "[Erai-raws] Tomodachi Game",
+        "path": "D:/PicturesVideos/Anime",
+        "episodes": [
+            1,
+            2,
+            3,
+            4
+        ],
+        "watched": [
+            1,
+            2,
+            3,
+            4
+        ]
+    }
 }

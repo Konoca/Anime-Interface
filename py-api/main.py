@@ -2,11 +2,19 @@ from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS, cross_origin
 import json
 import os
+from os.path import abspath, dirname
 import subprocess
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
-anime_dir = 'D:/PicturesVideos/Anime'
+
+anime_dir = os.getenv('ANIME_DIR')
+vlc_path = os.getenv('VLC_PATH')
+
+file_path = f'{dirname(abspath(__file__))}/anime.json'
 
 
 def find_file(anime_path, anime_name, episode):
@@ -21,7 +29,7 @@ def launch_file(anime_path, anime_name, episode):
     try:
         anime = find_file(anime_path, anime_name, episode)
         
-        subprocess.Popen(["C:/Program Files/VideoLAN/VLC/vlc.exe", f'\\{anime}'])
+        subprocess.Popen([vlc_path, f'\\{anime}'])
         return True
     except Exception as e:
         print(e)
@@ -52,7 +60,7 @@ def get_files(anime_path):
         else:
             new[anime_name]['episodes'] = [ep]
 
-        with open('anime.json', 'r') as f:
+        with open(file_path, 'r') as f:
             data = json.load(f)
 
         if data.get(anime_name):
@@ -73,10 +81,10 @@ def delete_file(anime_path, anime_name, episode):
         file = find_file(anime_path, anime_name, episode)
         os.remove(file)
 
-        with open('anime.json', 'r') as f:
+        with open(file_path, 'r') as f:
             data = json.load(f)
 
-        with open('anime.json', 'w') as f:
+        with open(file_path, 'w') as f:
             data.get(anime_name).get('watched').remove(int(episode))
             f.write(json.dumps(data, indent = 4))
 
@@ -87,10 +95,10 @@ def delete_file(anime_path, anime_name, episode):
 
 
 def update_anime(anime_name, episode, watched):
-    with open('anime.json', 'r') as f:
+    with open(file_path, 'r') as f:
             data = json.load(f)
 
-    with open('anime.json', 'w') as f:
+    with open(file_path, 'w') as f:
         print(episode, type(episode), watched, type(watched))
         if (int(episode) in data.get(anime_name).get('watched')) and (watched.lower() == 'false' or watched == False):
             data.get(anime_name).get('watched').remove(int(episode))
@@ -102,7 +110,7 @@ def update_anime(anime_name, episode, watched):
 
 def update_anime_list():
     anime_dict = get_files('')
-    with open('anime.json', 'w') as f:
+    with open(file_path, 'w') as f:
         f.write(json.dumps(anime_dict, indent = 4))
     return anime_dict
 
