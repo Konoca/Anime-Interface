@@ -1,127 +1,15 @@
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS, cross_origin
-import json
-import os
-from os.path import abspath, dirname
-import subprocess
 from dotenv import load_dotenv
+
+from update_anime import update_anime_list, update_anime_watched, update_anime_broadcast
+from get import find_file, launch_file, get_files
+from delete import delete_file
 
 load_dotenv()
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
-
-anime_dir = os.getenv('ANIME_DIR')
-vlc_path = os.getenv('VLC_PATH')
-
-file_path = f'{dirname(abspath(__file__))}/anime.json'
-
-
-def find_file(anime_name, episode):
-    file_name = f'{anime_name} - {int(episode):02d}'
-    for file in os.listdir(anime_dir):
-            if file.startswith(file_name):
-                return f'{anime_dir}/{file}'
-    raise Exception('File not found', file_name)
-
-
-def launch_file(anime_name, episode):
-    try:
-        anime = find_file(anime_name, episode)
-        
-        subprocess.Popen([vlc_path, f'\\{anime}'])
-        return True
-    except Exception as e:
-        print(e)
-        return False
-
-
-def get_files():
-    dir_list = os.listdir(anime_dir)
-    new = {}
-
-    for item in dir_list:
-        split = item.rsplit('-', 1)
-        anime_name = split[0].rstrip()
-
-        if not new.get(anime_name):
-            new[anime_name] = {}
-            new[anime_name]['name'] = anime_name
-
-        for str in split[1].split(' '):
-            if str.isdigit():
-                ep = int(str)
-                break
-
-        if new[anime_name].get('episodes'):
-            new[anime_name]['episodes'].append(ep)
-        else:
-            new[anime_name]['episodes'] = [ep]
-
-        with open(file_path, 'r') as f:
-            data = json.load(f)
-
-        if data.get(anime_name):
-            watched = []
-            for w in data[anime_name]['watched']:
-                if w in new[anime_name]['episodes']:
-                    watched.append(w)
-
-            new[anime_name]['watched'] = watched
-            new[anime_name]['broadcast'] = data[anime_name].get('broadcast') or ''
-        else:
-            new[anime_name]['watched'] = []
-            new[anime_name]['broadcast'] = ''
-
-    return new
-
-
-def delete_file(anime_name, episode):
-    try:
-        file = find_file(anime_name, episode)
-        os.remove(file)
-
-        with open(file_path, 'r') as f:
-            data = json.load(f)
-
-        with open(file_path, 'w') as f:
-            data.get(anime_name).get('watched').remove(int(episode))
-            f.write(json.dumps(data, indent = 4))
-
-        return True
-    except Exception as e:
-        print(e)
-        return False
-
-
-def update_anime_watched(anime_name, episode, watched):
-    with open(file_path, 'r') as f:
-            data = json.load(f)
-
-    with open(file_path, 'w') as f:
-        if (int(episode) in data.get(anime_name).get('watched')) and (watched.lower() == 'false' or watched == False):
-            data.get(anime_name).get('watched').remove(int(episode))
-        elif (int(episode) not in data.get(anime_name).get('watched')) and (watched.lower() == 'true' or watched == True):
-            data.get(anime_name).get('watched').append(int(episode))
-
-        f.write(json.dumps(data, indent = 4))
-
-
-def update_anime_broadcast(anime_name, broadcast):
-    with open(file_path, 'r') as f:
-            data = json.load(f)
-
-    with open(file_path, 'w') as f:
-        data[anime_name]['broadcast'] = broadcast
-
-        f.write(json.dumps(data, indent = 4))
-
-
-def update_anime_list():
-    anime_dict = get_files()
-    with open(file_path, 'w') as f:
-        f.write(json.dumps(anime_dict, indent = 4))
-    return anime_dict
 
 
 @app.route('/watch', methods = ['GET'])
