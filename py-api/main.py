@@ -17,17 +17,17 @@ vlc_path = os.getenv('VLC_PATH')
 file_path = f'{dirname(abspath(__file__))}/anime.json'
 
 
-def find_file(anime_path, anime_name, episode):
+def find_file(anime_name, episode):
     file_name = f'{anime_name} - {int(episode):02d}'
-    for file in os.listdir(anime_path):
+    for file in os.listdir(anime_dir):
             if file.startswith(file_name):
-                return f'{anime_path}/{file}'
+                return f'{anime_dir}/{file}'
     raise Exception('File not found', file_name)
 
 
-def launch_file(anime_path, anime_name, episode):
+def launch_file(anime_name, episode):
     try:
-        anime = find_file(anime_path, anime_name, episode)
+        anime = find_file(anime_name, episode)
         
         subprocess.Popen([vlc_path, f'\\{anime}'])
         return True
@@ -36,9 +36,8 @@ def launch_file(anime_path, anime_name, episode):
         return False
 
 
-def get_files(anime_path):
-    dir = anime_dir + anime_path
-    dir_list = os.listdir(dir)
+def get_files():
+    dir_list = os.listdir(anime_dir)
     new = {}
 
     for item in dir_list:
@@ -48,7 +47,6 @@ def get_files(anime_path):
         if not new.get(anime_name):
             new[anime_name] = {}
             new[anime_name]['name'] = anime_name
-            new[anime_name]['path'] = dir
 
         for str in split[1].split(' '):
             if str.isdigit():
@@ -76,9 +74,9 @@ def get_files(anime_path):
     return new
 
 
-def delete_file(anime_path, anime_name, episode):
+def delete_file(anime_name, episode):
     try:
-        file = find_file(anime_path, anime_name, episode)
+        file = find_file(anime_name, episode)
         os.remove(file)
 
         with open(file_path, 'r') as f:
@@ -109,7 +107,7 @@ def update_anime(anime_name, episode, watched):
 
 
 def update_anime_list():
-    anime_dict = get_files('')
+    anime_dict = get_files()
     with open(file_path, 'w') as f:
         f.write(json.dumps(anime_dict, indent = 4))
     return anime_dict
@@ -129,7 +127,7 @@ def get_anime():
         return jsonify(anime_dict.get(anime_name))
     else:
         print(anime_name, '-', episode)
-        status = launch_file(anime_dict.get(anime_name).get('path'), anime_name, episode)
+        status = launch_file(anime_name, episode)
         return jsonify({"Status": status})
 
 
@@ -145,7 +143,7 @@ def delete_anime():
         return jsonify({"Error": "Missing information"})
     else:
         print(anime_name, '-', episode)
-        status = delete_file(anime_dict.get(anime_name).get('path'), anime_name, episode)
+        status = delete_file(anime_name, episode)
         return jsonify({"Status": status})
 
 
