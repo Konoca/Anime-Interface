@@ -68,8 +68,10 @@ def get_files():
                     watched.append(w)
 
             new[anime_name]['watched'] = watched
+            new[anime_name]['broadcast'] = data[anime_name].get('broadcast') or ''
         else:
             new[anime_name]['watched'] = []
+            new[anime_name]['broadcast'] = ''
 
     return new
 
@@ -92,16 +94,25 @@ def delete_file(anime_name, episode):
         return False
 
 
-def update_anime(anime_name, episode, watched):
+def update_anime_watched(anime_name, episode, watched):
     with open(file_path, 'r') as f:
             data = json.load(f)
 
     with open(file_path, 'w') as f:
-        print(episode, type(episode), watched, type(watched))
         if (int(episode) in data.get(anime_name).get('watched')) and (watched.lower() == 'false' or watched == False):
             data.get(anime_name).get('watched').remove(int(episode))
         elif (int(episode) not in data.get(anime_name).get('watched')) and (watched.lower() == 'true' or watched == True):
             data.get(anime_name).get('watched').append(int(episode))
+
+        f.write(json.dumps(data, indent = 4))
+
+
+def update_anime_broadcast(anime_name, broadcast):
+    with open(file_path, 'r') as f:
+            data = json.load(f)
+
+    with open(file_path, 'w') as f:
+        data[anime_name]['broadcast'] = broadcast
 
         f.write(json.dumps(data, indent = 4))
 
@@ -113,9 +124,22 @@ def update_anime_list():
     return anime_dict
 
 
+@app.route('/watch', methods = ['GET'])
+@cross_origin(supports_credentials=True)
+def open_anime():
+    anime_dict = update_anime_list()
+
+    anime_name = request.args.get('name')
+    episode = request.args.get('episode')
+
+    print(anime_name, '-', episode)
+    status = launch_file(anime_name, episode)
+    return jsonify({"Status": status})
+
+
 @app.route('/anime', methods = ['GET'])
 @cross_origin(supports_credentials=True)
-def get_anime():
+def get_anime_details():
     anime_dict = update_anime_list()
 
     anime_name = request.args.get('name')
@@ -126,9 +150,7 @@ def get_anime():
     if anime_name and not episode:
         return jsonify(anime_dict.get(anime_name))
     else:
-        print(anime_name, '-', episode)
-        status = launch_file(anime_name, episode)
-        return jsonify({"Status": status})
+        return jsonify({"Error": "Missing information"})
 
 
 @app.route('/anime', methods = ['DELETE'])
@@ -147,7 +169,7 @@ def delete_anime():
         return jsonify({"Status": status})
 
 
-@app.route('/anime', methods = ['PUT'])
+@app.route('/watch', methods = ['PUT'])
 @cross_origin(supports_credentials=True)
 def watch_anime():
     anime_dict = update_anime_list()
@@ -160,7 +182,23 @@ def watch_anime():
         return jsonify({"Error": "Missing information"})
     else:
         print(anime_name, '-', episode, '-', watched)
-        update_anime(anime_name, episode, watched)
+        update_anime_watched(anime_name, episode, watched)
+        anime_dict = update_anime_list()
+        return jsonify(anime_dict.get(anime_name))
+
+
+@app.route('/broadcast', methods = ['PUT'])
+@cross_origin(supports_credentials=True)
+def broadcast_anime():
+    anime_dict = update_anime_list()
+
+    anime_name = request.args.get('name')
+    broadcast = request.args.get('broadcast')
+
+    if not anime_name or not broadcast:
+        return jsonify({"Error": "Missing information"})
+    else:
+        update_anime_broadcast(anime_name, broadcast)
         anime_dict = update_anime_list()
         return jsonify(anime_dict.get(anime_name))
 

@@ -1,4 +1,4 @@
-<p-table [value]="rows" responsiveLayout="scroll" dataKey="name">
+<p-table [value]="rows" responsiveLayout="scroll" dataKey="name" [paginator]="true" [rows]="5" (onEditComplete)="onEditComplete($event)">
   <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
           <h1>Anime Interface</h1>
@@ -8,6 +8,7 @@
   <ng-template pTemplate="header">
       <tr>
           <th>Name</th>
+          <th>Broadcast Day</th>
           <th>Episodes Watched / Episodes Downloaded</th>
           <th style="width:4rem"></th>
       </tr>
@@ -15,6 +16,16 @@
   <ng-template pTemplate="body" let-anime>
       <tr>
           <td>{{anime.name}}</td>
+          <td pEditableColumn [pEditableColumn]="anime">
+            <p-cellEditor>
+                <ng-template pTemplate="input">
+                    <input pInputText type="text" [(ngModel)]="anime.broadcast">
+                </ng-template>
+                <ng-template pTemplate="output">
+                    {{anime.broadcast}}
+                </ng-template>
+            </p-cellEditor>
+        </td>
           <td>{{anime.watched.length}} / {{anime.episodes.length}}</td>
           <td>
             <button type="button" class="p-button-rounded" pButton pRipple icon="pi pi-list" (click)="selectAnime(anime)"></button>

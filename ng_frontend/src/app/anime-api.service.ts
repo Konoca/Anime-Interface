@@ -13,14 +13,18 @@ export class AnimeApiService {
   }
 
   openAnime(animeName: string, episode: string) {
-    return this.httpClient.get(`http://127.0.0.1:8000/anime?name=${animeName}&episode=${episode}`);
+    return this.httpClient.get(`http://127.0.0.1:8000/watch?name=${animeName}&episode=${episode}`);
   }
 
   setWatched(animeName: string, episode: string, watched: boolean) {
-    return this.httpClient.request('PUT', `http://127.0.0.1:8000/anime?name=${animeName}&episode=${episode}&watched=${watched}`);
+    return this.httpClient.request('PUT', `http://127.0.0.1:8000/watch?name=${animeName}&episode=${episode}&watched=${watched}`);
   }
 
   deleteAnime(animeName: string, episode: string) {
     return this.httpClient.delete(`http://127.0.0.1:8000/anime?name=${animeName}&episode=${episode}`);
+  }
+
+  setBroadcast(animeName: string, broadcast: string) {
+    return this.httpClient.request('PUT', `http://127.0.0.1:8000/broadcast?name=${animeName}&broadcast=${broadcast}`);
   }
 }

@@ -1,6 +1,6 @@
 export interface Anime {
     name: string;
-    path: string;
+    broadcast: string;
     episodes: number[];
     watched: number[];
 }

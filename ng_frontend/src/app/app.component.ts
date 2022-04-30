@@ -58,4 +58,11 @@ export class AppComponent {
       this.getData();
     });
   }
+
+  onEditComplete(event: any) { 
+    const anime = event.data
+    this.animeApi.setBroadcast(anime.name, anime.broadcast).subscribe((r) => {
+      this.getData();
+    })
+  }
 }

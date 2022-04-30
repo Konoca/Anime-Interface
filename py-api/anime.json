@@ -10,7 +10,8 @@
         ],
         "watched": [
             242
-        ]
+        ],
+        "broadcast": "Sunday"
     },
     "[Erai-raws] Kaguya-sama wa Kokurasetai - Ultra Romantic": {
         "name": "[Erai-raws] Kaguya-sama wa Kokurasetai - Ultra Romantic",
@@ -23,7 +24,8 @@
             1,
             2,
             3
-        ]
+        ],
+        "broadcast": "Saturday"
     },
     "[Erai-raws] Spy x Family": {
         "name": "[Erai-raws] Spy x Family",
@@ -36,7 +38,8 @@
             1,
             2,
             3
-        ]
+        ],
+        "broadcast": "Saturday"
     },
     "[Erai-raws] Tate no Yuusha no Nariagari Season 2": {
         "name": "[Erai-raws] Tate no Yuusha no Nariagari Season 2",
@@ -51,7 +54,8 @@
             2,
             3,
             4
-        ]
+        ],
+        "broadcast": "Wednesday"
     },
     "[Erai-raws] Tomodachi Game": {
         "name": "[Erai-raws] Tomodachi Game",
@@ -66,7 +70,8 @@
             2,
             3,
             4
-        ]
+        ],
+        "broadcast": "Wednesday"
     },
     "[HorribleSubs] Rakudai Kishi no Cavalry": {
         "name": "[HorribleSubs] Rakudai Kishi no Cavalry",
@@ -78,6 +83,7 @@
         "watched": [
             10,
             11
-        ]
+        ],
+        "broadcast": ""
     }
 }
