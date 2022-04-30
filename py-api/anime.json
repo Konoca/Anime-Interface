@@ -72,6 +72,27 @@
         ],
         "broadcast": "Wednesday"
     },
+    "[Erai-raws] Wonder Egg Priority": {
+        "name": "[Erai-raws] Wonder Egg Priority",
+        "episodes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+        ],
+        "watched": [
+            1
+        ],
+        "broadcast": ""
+    },
     "[HorribleSubs] Rakudai Kishi no Cavalry": {
         "name": "[HorribleSubs] Rakudai Kishi no Cavalry",
         "episodes": [
