@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Anime } from './anime';
+import { Anime, UpdateAnimeData, UpdateAnimeEpData } from './anime';
 import { AnimeApiService } from './anime-api.service';
 
 @Component({
@@ -48,9 +48,15 @@ export class AppComponent {
 
   markEpWatched(ep: any) {
     const isWatched = this.isEpWatched(ep);
-    this.animeApi.setWatched(this.selectedAnime.name, ep, isWatched).subscribe((r) => {
+    const ep_data: UpdateAnimeEpData = {name: this.selectedAnime.name, episode: ep, watched: isWatched};
+
+    this.animeApi.updateAnime(ep_data).subscribe((r) => {
       this.getData();
     })
+
+    // this.animeApi.setWatched(this.selectedAnime.name, ep, isWatched).subscribe((r) => {
+    //   this.getData();
+    // })
   }
 
   deleteEp(ep: any) {
@@ -60,8 +66,10 @@ export class AppComponent {
   }
 
   onEditComplete(event: any) { 
-    const anime = event.data
-    this.animeApi.setBroadcast(anime.name, anime.broadcast).subscribe((r) => {
+    const anime = event.data;
+    const anime_data: UpdateAnimeData = {name: anime.name, broadcast: anime.broadcast, description: anime.description};
+
+    this.animeApi.updateAnime(anime_data).subscribe((r) => {
       this.getData();
     })
   }

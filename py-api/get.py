@@ -57,8 +57,10 @@ def get_files():
 
             new[anime_name]['watched'] = watched
             new[anime_name]['broadcast'] = data[anime_name].get('broadcast') or ''
+            new[anime_name]['description'] = data[anime_name].get('description') or ''
         else:
             new[anime_name]['watched'] = []
             new[anime_name]['broadcast'] = ''
+            new[anime_name]['description'] = ''
 
     return new

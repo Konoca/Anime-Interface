@@ -1,8 +1,9 @@
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS, cross_origin
+import json
 from dotenv import load_dotenv
 
-from update_anime import update_anime_list, update_anime_watched, update_anime_broadcast
+from update_anime import update_anime_list, update_anime_watched, update_anime_broadcast, update_anime_description
 from get import find_file, launch_file, get_files
 from delete import delete_file
 
@@ -57,38 +58,35 @@ def delete_anime():
         return jsonify({"Status": status})
 
 
-@app.route('/watch', methods = ['PUT'])
+@app.route('/anime', methods = ['PUT'])
 @cross_origin(supports_credentials=True)
-def watch_anime():
+def update_anime_data():
     anime_dict = update_anime_list()
 
-    anime_name = request.args.get('name')
-    episode = request.args.get('episode')
-    watched = request.args.get('watched')
+    anime_info = json.loads(request.data)
 
-    if not anime_name or not episode or not watched:
+    anime_name = anime_info.get('name')
+    episode = anime_info.get('episode')
+    watched = anime_info.get('watched')
+    broadcast = anime_info.get('broadcast')
+    description = anime_info.get('description')
+
+    print(anime_info)
+
+    if not anime_name:
         return jsonify({"Error": "Missing information"})
-    else:
-        print(anime_name, '-', episode, '-', watched)
+
+    if episode and watched:
         update_anime_watched(anime_name, episode, watched)
-        anime_dict = update_anime_list()
-        return jsonify(anime_dict.get(anime_name))
 
-
-@app.route('/broadcast', methods = ['PUT'])
-@cross_origin(supports_credentials=True)
-def broadcast_anime():
-    anime_dict = update_anime_list()
-
-    anime_name = request.args.get('name')
-    broadcast = request.args.get('broadcast')
-
-    if not anime_name or not broadcast:
-        return jsonify({"Error": "Missing information"})
-    else:
+    if broadcast:
         update_anime_broadcast(anime_name, broadcast)
-        anime_dict = update_anime_list()
-        return jsonify(anime_dict.get(anime_name))
+
+    if description:
+        update_anime_description(anime_name, description)
+
+    anime_dict = update_anime_list()
+    return jsonify(anime_dict.get(anime_name))
 
 
 if __name__ == '__main__':
