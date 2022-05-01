@@ -25,10 +25,11 @@
         "watched": [
             1,
             2,
-            3
+            3,
+            4
         ],
         "broadcast": "Saturday",
-        "description": ""
+        "description": "Love is war s3"
     },
     "[Erai-raws] Spy x Family": {
         "name": "[Erai-raws] Spy x Family",
@@ -41,7 +42,8 @@
         "watched": [
             1,
             2,
-            3
+            3,
+            4
         ],
         "broadcast": "Saturday",
         "description": ""
@@ -61,7 +63,7 @@
             4
         ],
         "broadcast": "Wednesday",
-        "description": "Shield Hero"
+        "description": "Shield Hero s2"
     },
     "[Erai-raws] Tomodachi Game": {
         "name": "[Erai-raws] Tomodachi Game",
@@ -97,7 +99,9 @@
             12
         ],
         "watched": [
-            1
+            1,
+            2,
+            3
         ],
         "broadcast": "",
         "description": ""
