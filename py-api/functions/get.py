@@ -1,6 +1,5 @@
 import json
 import os
-from os.path import abspath, dirname
 import subprocess
 
 def find_file(anime_name, episode):

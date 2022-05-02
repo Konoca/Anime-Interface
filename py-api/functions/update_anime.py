@@ -1,6 +1,5 @@
 import json
 import os
-from os.path import abspath, dirname
 from functions.get import get_files
 
 def update_anime_watched(file_path, anime_name, episode, watched):
