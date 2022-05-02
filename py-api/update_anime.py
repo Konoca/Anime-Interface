@@ -1,4 +1,5 @@
 import json
+import os
 from os.path import abspath, dirname
 from get import get_files
 
@@ -38,6 +39,10 @@ def update_anime_description(anime_name, description):
 
 
 def update_anime_list():
+    if not os.path.exists(file_path):
+        with open(file_path, 'w') as f:
+            f.write('{}')
+
     anime_dict = get_files()
     with open(file_path, 'w') as f:
         f.write(json.dumps(anime_dict, indent = 4))
