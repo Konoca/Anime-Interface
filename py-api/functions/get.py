@@ -3,8 +3,6 @@ import os
 from os.path import abspath, dirname
 import subprocess
 
-file_path = f'{dirname(abspath(__file__))}/anime.json'
-
 def find_file(anime_name, episode):
     file_name = f'{anime_name} - {int(episode):02d}'
     for file in os.listdir(os.getenv('ANIME_DIR')):
@@ -13,7 +11,7 @@ def find_file(anime_name, episode):
     raise Exception('File not found', file_name)
 
 
-def launch_file(anime_name, episode):
+def launch_file(file_path, anime_name, episode):
     try:
         anime = find_file(anime_name, episode)
         
@@ -24,7 +22,7 @@ def launch_file(anime_name, episode):
         return False
 
 
-def get_files():
+def get_files(file_path):
     dir_list = os.listdir(os.getenv('ANIME_DIR'))
     new = {}
 

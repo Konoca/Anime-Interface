@@ -1,11 +1,9 @@
 import json
 import os
 from os.path import abspath, dirname
-from get import get_files
+from functions.get import get_files
 
-file_path = f'{dirname(abspath(__file__))}/anime.json'
-
-def update_anime_watched(anime_name, episode, watched):
+def update_anime_watched(file_path, anime_name, episode, watched):
     with open(file_path, 'r') as f:
             data = json.load(f)
 
@@ -18,7 +16,7 @@ def update_anime_watched(anime_name, episode, watched):
         f.write(json.dumps(data, indent = 4))
 
 
-def update_anime_broadcast(anime_name, broadcast):
+def update_anime_broadcast(file_path, anime_name, broadcast):
     with open(file_path, 'r') as f:
             data = json.load(f)
 
@@ -28,7 +26,7 @@ def update_anime_broadcast(anime_name, broadcast):
         f.write(json.dumps(data, indent = 4))
 
 
-def update_anime_description(anime_name, description):
+def update_anime_description(file_path, anime_name, description):
     with open(file_path, 'r') as f:
             data = json.load(f)
 
@@ -38,12 +36,12 @@ def update_anime_description(anime_name, description):
         f.write(json.dumps(data, indent = 4))
 
 
-def update_anime_list():
+def update_anime_list(file_path):
     if not os.path.exists(file_path):
         with open(file_path, 'w') as f:
             f.write('{}')
 
-    anime_dict = get_files()
+    anime_dict = get_files(file_path)
     with open(file_path, 'w') as f:
         f.write(json.dumps(anime_dict, indent = 4))
     return anime_dict

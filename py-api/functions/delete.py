@@ -1,12 +1,9 @@
 import json
 import os
-from os.path import abspath, dirname
 
-from get import find_file
+from functions.get import find_file
 
-file_path = f'{dirname(abspath(__file__))}/anime.json'
-
-def delete_file(anime_name, episode):
+def delete_file(file_path, anime_name, episode):
     try:
         file = find_file(anime_name, episode)
         os.remove(file)
