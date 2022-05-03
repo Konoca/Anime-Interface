@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS, cross_origin
 import json
+import os
 from os.path import abspath, dirname
 from dotenv import load_dotenv
 
@@ -19,6 +20,8 @@ file_path = file_path = f'{dirname(abspath(__file__))}/anime.json'
 @app.route('/watch', methods = ['GET'])
 @cross_origin(supports_credentials=True)
 def open_anime():
+    if db_mode.lower() == 'true': return jsonify({"Status": False})
+
     anime_dict = update_anime_list(file_path)
 
     anime_name = request.args.get('name')
@@ -27,6 +30,19 @@ def open_anime():
     print(anime_name, '-', episode)
     status = launch_file(file_path, anime_name, episode)
     return jsonify({"Status": status})
+
+
+@app.route('/mode', methods = ['GET'])
+@cross_origin(supports_credentials=True)
+def get_mode():
+    db_mode = os.getenv('DB_MODE')
+
+    if db_mode.lower() == 'true':
+        mode = "DB"
+    else:
+        mode = "Interface"
+
+    return jsonify({"Mode": mode})
 
 
 @app.route('/anime', methods = ['GET'])
@@ -94,3 +110,5 @@ def update_anime_data():
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
     update_anime_list(file_path)
+
+    # TODO DB MODE (ONLY EDITS JSON)

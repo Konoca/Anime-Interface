@@ -13,15 +13,19 @@ export class AppComponent {
   displayDialog: boolean = false;
   selectedAnime: any = {name: ""};
 
+  db_mode: boolean = false;
+  title: string = "Anime Interface"
+
   constructor(
     private animeApi: AnimeApiService
   ) { }
 
   ngOnInit() {
-    this.getData();
+    this.refresh()
   }
 
   getData() {
+    this.displayDialog = false;
     this.rows = [];
     this.animeApi.getAnime().subscribe((data: any) => {
       let animes: Anime[] = [];
@@ -31,6 +35,20 @@ export class AppComponent {
       }
       this.rows = animes;
     })
+  }
+
+  getMode() {
+    this.animeApi.getMode().subscribe((data: any) => {
+      if (data.Mode == 'DB') {
+        this.db_mode = true;
+        this.title = "DB Interface"
+      }
+    })
+  }
+
+  refresh() {
+    this.getData();
+    this.getMode();
   }
 
   selectAnime(anime: Anime) {

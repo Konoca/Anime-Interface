@@ -28,7 +28,7 @@ def update_anime_broadcast(file_path, anime_name, broadcast):
 
 def update_anime_description(file_path, anime_name, description):
     with open(file_path, 'r') as f:
-            data = json.load(f)
+        data = json.load(f)
 
     with open(file_path, 'w') as f:
         data[anime_name]['description'] = description
@@ -41,8 +41,12 @@ def update_anime_list(file_path):
         with open(file_path, 'w') as f:
             f.write('{}')
 
-    anime_dict = get_files(file_path)
-    with open(file_path, 'w') as f:
-        f.write(json.dumps(anime_dict, indent = 4))
+    if os.getenv('DB_MODE').lower() == 'false':
+        anime_dict = get_files(file_path)
+        with open(file_path, 'w') as f:
+            f.write(json.dumps(anime_dict, indent = 4))
+    else:
+        with open(file_path, 'r') as f:
+            anime_dict = json.load(f)
 
     return anime_dict

@@ -17,3 +17,7 @@ export interface UpdateAnimeData {
     broadcast: string;
     description: string;
 }
+
+export interface APIMode {
+    mode: string;
+}

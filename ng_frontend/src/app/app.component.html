@@ -8,8 +8,8 @@
 >
   <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
-          <h1>Anime Interface</h1>
-          <p-button icon="pi pi-refresh" (onClick)="getData()"></p-button>
+          <h1>{{title}}</h1>
+          <p-button icon="pi pi-refresh" (onClick)="refresh()"></p-button>
       </div>
   </ng-template>
   <ng-template pTemplate="header">
@@ -62,7 +62,7 @@
       <ng-template pTemplate="header">
           <tr>
               <th>Episode</th>
-              <th>Watch</th>
+              <th *ngIf="!db_mode">Watch</th>
               <th>Watched?</th>
               <th>Delete</th>
           </tr>
@@ -70,7 +70,7 @@
       <ng-template pTemplate="body" let-ep>
         <tr>
             <td>{{ep}}</td>
-            <td><button type="button" class="p-button-rounded" pButton pRipple icon="pi pi-play" (click)="watchEp(ep)"></button></td>
+            <td *ngIf="!db_mode"><button type="button" class="p-button-rounded" pButton pRipple icon="pi pi-play" (click)="watchEp(ep)"></button></td>
             <td>
               <p-checkbox value="ep" [value]="ep" [(ngModel)]="selectedAnime.watched" [inputId]="isEpWatched(ep)" (onChange)="markEpWatched(ep)"></p-checkbox>
             </td>

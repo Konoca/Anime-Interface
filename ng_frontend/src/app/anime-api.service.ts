@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Anime } from './anime';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +10,10 @@ export class AnimeApiService {
 
   getAnime() {
     return this.httpClient.get('http://127.0.0.1:8000/anime');
+  }
+
+  getMode() {
+    return this.httpClient.get('http://127.0.0.1:8000/mode');
   }
 
   openAnime(animeName: string, episode: string) {
