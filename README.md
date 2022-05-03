@@ -1,5 +1,5 @@
 # Anime Interface
-A local website that allows you to manage anime files you have downloaded onto your computer. Allows you to mark episodes as watched, open the episode and start watching, and delete the episode from your computer. Also let's you keep note of any descriptions you might have of an Anime, as well as when that Anime broadcasts a new episode (if it is still airing)
+A local website that allows you to manage anime files you have downloaded onto your computer. Allows you to mark episodes as watched, open the episode and start watching, and delete the episode from your computer. Also let's you keep note of any descriptions you might have of an Anime, as well as when that Anime broadcasts a new episode (if it is still airing).
 
 <img src="https://i.imgur.com/w5VMBfJ.jpg" width=75% height=75%>
 <img src="https://i.imgur.com/hVOxHuQ.jpg" width=50% height=50%>
@@ -66,4 +66,3 @@ Create copy of .env-template and rename as ".env". Below are descriptions of all
 # TODO
 - Ability to add anime when in DB mode
 - Maybe add a way to store JSON into some external DB, and fetch on startup?
-- Download anime while in Interface Mode

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Anime, UpdateAnimeData, UpdateAnimeEpData } from './anime';
+import { Anime, NyaaSearchResult, UpdateAnimeData, UpdateAnimeEpData } from './anime';
 import { AnimeApiService } from './anime-api.service';
 
 @Component({
@@ -15,6 +15,12 @@ export class AppComponent {
 
   db_mode: boolean = false;
   title: string = "Anime Interface"
+
+  addDialog: boolean = false;
+  searchAnimeDialog: boolean = false;
+
+  searchAnimeValue: string = "";
+  searchResults: NyaaSearchResult[] = [];
 
   constructor(
     private animeApi: AnimeApiService
@@ -90,5 +96,23 @@ export class AppComponent {
     this.animeApi.updateAnime(anime_data).subscribe((r) => {
       this.getData();
     })
+  }
+
+  add() {
+    if (this.db_mode)
+      this.addDialog = true;
+    else
+    this.searchAnimeDialog = true;
+  }
+
+  searchAnime() {
+    this.animeApi.searchAnime({query: this.searchAnimeValue}).subscribe((r: any) => {
+      this.searchResults = r
+    })
+  }
+
+  downloadAnime(anime: NyaaSearchResult) {
+    const wind = window.open(anime.magnet)
+    wind?.close()
   }
 }

@@ -9,7 +9,11 @@
   <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
           <h1>{{title}}</h1>
-          <p-button icon="pi pi-refresh" (onClick)="refresh()"></p-button>
+          <span class="p-buttonset">
+                <p-button icon="pi pi-plus" (onClick)="add()"></p-button>
+                <p-button icon="pi pi-refresh" (onClick)="refresh()"></p-button>
+          </span>
+          
       </div>
   </ng-template>
   <ng-template pTemplate="header">
@@ -59,26 +63,74 @@
 <p-dialog header="{{selectedAnime.name}}" [(visible)]="displayDialog" [modal]="true" [style]="{width: '50vw'}"
     [draggable]="false" [resizable]="false">
     <p-table [value]="selectedAnime.episodes" responsiveLayout="scroll" dataKey="name">
-      <ng-template pTemplate="header">
-          <tr>
-              <th>Episode</th>
-              <th *ngIf="!db_mode">Watch</th>
-              <th>Watched?</th>
-              <th>Delete</th>
-          </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-ep>
-        <tr>
-            <td>{{ep}}</td>
-            <td *ngIf="!db_mode"><button type="button" class="p-button-rounded" pButton pRipple icon="pi pi-play" (click)="watchEp(ep)"></button></td>
-            <td>
-              <p-checkbox value="ep" [value]="ep" [(ngModel)]="selectedAnime.watched" [inputId]="isEpWatched(ep)" (onChange)="markEpWatched(ep)"></p-checkbox>
-            </td>
-            <td><button type="button" class="p-button-rounded p-button-danger" pButton pRipple icon="pi pi-trash" (click)="deleteEp(ep)"></button></td>
-        </tr>
-    </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Episode</th>
+                <th *ngIf="!db_mode">Watch</th>
+                <th>Watched?</th>
+                <th>Delete</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-ep>
+            <tr>
+                <td>{{ep}}</td>
+                <td *ngIf="!db_mode"><button type="button" class="p-button-rounded" pButton pRipple icon="pi pi-play" (click)="watchEp(ep)"></button></td>
+                <td>
+                <p-checkbox value="ep" [value]="ep" [(ngModel)]="selectedAnime.watched" [inputId]="isEpWatched(ep)" (onChange)="markEpWatched(ep)"></p-checkbox>
+                </td>
+                <td><button type="button" class="p-button-rounded p-button-danger" pButton pRipple icon="pi pi-trash" (click)="deleteEp(ep)"></button></td>
+            </tr>
+        </ng-template>
     </p-table>
 
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayDialog=false" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Add new Anime" [(visible)]="searchAnimeDialog" [modal]="true"
+    [draggable]="false" [resizable]="false">
+    
+    <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText placeholder="Search" [(ngModel)]="searchAnimeValue" />
+    </span>
+    <p-button icon="pi pi-search" (onClick)="searchAnime()"></p-button>
+
+    <p-table [value]="searchResults" dataKey="name" responsiveLayout="scroll"
+        [scrollable]="true" scrollHeight="400px" styleClass="p-datatable-gridlines" >
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>Link</th>
+                <th>Size</th>
+                <th>Date</th>
+                <th>Seeders</th>
+                <th>Leachers</th>
+                <th>Downloads</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-download>
+            <tr>
+                <td>{{download.name}}</td>
+                <td>
+                    <button
+                        type="button"
+                        class="p-button-rounded"
+                        pButton pRipple
+                        icon="pi pi-download"
+                        (click)="downloadAnime(download)"
+                    ></button>
+                </td>
+                <td>{{download.size}}</td>
+                <td>{{download.date}}</td>
+                <td>{{download.seeders}}</td>
+                <td>{{download.leechers}}</td>
+                <td>{{download.completed_downloads}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
 
     <ng-template pTemplate="footer">
         <p-button icon="pi pi-check" (click)="displayDialog=false" label="Ok" styleClass="p-button-text"></p-button>

@@ -21,3 +21,16 @@ export interface UpdateAnimeData {
 export interface APIMode {
     mode: string;
 }
+
+export interface NyaaSearchResult {
+    category: string;
+    url: string;
+    name: string;
+    download_url: string;
+    magnet: string;
+    size: string;
+    date: string;
+    seeders: string;
+    leechers: string;
+    completed_downloads: string;
+}

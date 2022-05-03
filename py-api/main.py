@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from functions.update_anime import update_anime_list, update_anime_watched, update_anime_broadcast, update_anime_description
 from functions.get import find_file, launch_file, get_files
 from functions.delete import delete_file
+from functions.search import search
 
 load_dotenv()
 
@@ -43,6 +44,18 @@ def get_mode():
         mode = "Interface"
 
     return jsonify({"Mode": mode})
+
+
+@app.route('/search', methods = ['PUT'])
+@cross_origin(supports_credentials=True)
+def search_anime():
+    data = json.loads(request.data)
+
+    query = data.get('query')
+    
+    results = search(query)
+
+    return jsonify(results)
 
 
 @app.route('/anime', methods = ['GET'])
