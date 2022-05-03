@@ -9,7 +9,7 @@ export interface Anime {
 export interface UpdateAnimeEpData {
     name: string;
     episode: string;
-    watched: string;
+    watched: boolean;
 }
 
 export interface UpdateAnimeData {

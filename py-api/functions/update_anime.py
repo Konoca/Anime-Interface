@@ -2,16 +2,17 @@ import json
 import os
 from functions.get import get_files
 
-def update_anime_watched(file_path, anime_name, episode, watched):
+
+def update_anime_watched(file_path, anime_name, episode, watched:bool=False):
     with open(file_path, 'r') as f:
             data = json.load(f)
 
-    with open(file_path, 'w') as f:
-        if (int(episode) in data.get(anime_name).get('watched')) and (watched == False or watched.lower() == 'false'):
-            data.get(anime_name).get('watched').remove(int(episode))
-        elif (int(episode) not in data.get(anime_name).get('watched')) and (watched == True or watched.lower() == 'true'):
-            data.get(anime_name).get('watched').append(int(episode))
+    if (int(episode) in data.get(anime_name).get('watched')) and (watched == False):
+        data.get(anime_name).get('watched').remove(int(episode))
+    elif (int(episode) not in data.get(anime_name).get('watched')) and (watched == True):
+        data.get(anime_name).get('watched').append(int(episode))       
 
+    with open(file_path, 'w') as f:
         f.write(json.dumps(data, indent = 4))
 
 
@@ -43,4 +44,5 @@ def update_anime_list(file_path):
     anime_dict = get_files(file_path)
     with open(file_path, 'w') as f:
         f.write(json.dumps(anime_dict, indent = 4))
+
     return anime_dict

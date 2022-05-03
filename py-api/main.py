@@ -35,14 +35,11 @@ def get_anime_details():
     anime_dict = update_anime_list(file_path)
 
     anime_name = request.args.get('name')
-    episode = request.args.get('episode')
 
-    if not anime_name and not episode:
+    if not anime_name:
         return jsonify(anime_dict)
-    if anime_name and not episode:
+    if anime_name:
         return jsonify(anime_dict.get(anime_name))
-    else:
-        return jsonify({"Error": "Missing information"})
 
 
 @app.route('/anime', methods = ['DELETE'])
@@ -77,15 +74,17 @@ def update_anime_data():
     print(anime_info)
 
     if not anime_name:
+        print('test')
         return jsonify({"Error": "Missing information"})
 
-    if episode and watched:
+    if episode and (watched == True or watched == False):
+        print(anime_name, episode, watched)
         update_anime_watched(file_path, anime_name, episode, watched)
 
     if broadcast:
         update_anime_broadcast(file_path, anime_name, broadcast)
 
-    if description:
+    if description or description == '':
         update_anime_description(file_path, anime_name, description)
 
     anime_dict = update_anime_list(file_path)
