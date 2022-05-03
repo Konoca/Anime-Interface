@@ -25,7 +25,6 @@ export class AppComponent {
   }
 
   getData() {
-    this.displayDialog = false;
     this.rows = [];
     this.animeApi.getAnime().subscribe((data: any) => {
       let animes: Anime[] = [];
@@ -71,15 +70,12 @@ export class AppComponent {
     this.animeApi.updateAnime(ep_data).subscribe((r) => {
       this.getData();
     })
-
-    // this.animeApi.setWatched(this.selectedAnime.name, ep, isWatched).subscribe((r) => {
-    //   this.getData();
-    // })
   }
 
   deleteEp(ep: any) {
     this.animeApi.deleteAnime(this.selectedAnime.name, ep).subscribe((r) => {
       this.getData();
+      this.selectedAnime.episodes = this.selectedAnime.episodes.filter(function(e: any) { return e !== ep });
     });
   }
 
