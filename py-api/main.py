@@ -20,7 +20,7 @@ file_path = file_path = f'{dirname(abspath(__file__))}/anime.json'
 @app.route('/watch', methods = ['GET'])
 @cross_origin(supports_credentials=True)
 def open_anime():
-    if db_mode.lower() == 'true': return jsonify({"Status": False})
+    if os.getenv('DB_MODE').lower() == 'true': return jsonify({"Status": False})
 
     anime_dict = update_anime_list(file_path)
 
