@@ -64,7 +64,7 @@ Create copy of .env-template and rename as ".env". Below are descriptions of all
 | ANIME_DIR | Directory to where all Anime files on computer are stored.
 | VLC_PATH  | Path to where "vlc.exe" is located on computer, typically looks something similar to "C:/Program Files/VideoLAN/VLC/vlc.exe" for windows.
 | JSON_PATH | Path to json file where all the data will be stored.
-| DB_MODE   | If true, neither of the above values need to be set. Sets system into Database mode rather than Interface mode.
+| DB_MODE   | If true, ANIME_DIR and VLC_PATH do not need to be set. Sets system into Database mode rather than Interface mode.
 
 # TODO
 - Make everything just look nicer overall
