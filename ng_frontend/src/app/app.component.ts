@@ -99,10 +99,14 @@ export class AppComponent {
   }
 
   add() {
-    if (this.db_mode)
+    if (this.db_mode) {
       this.addDialog = true;
-    else
-    this.searchAnimeDialog = true;
+    }
+    else {
+      this.searchAnimeValue = "";
+      this.searchResults = [];
+      this.searchAnimeDialog = true;
+    }
   }
 
   searchAnime() {
@@ -114,5 +118,11 @@ export class AppComponent {
   downloadAnime(anime: NyaaSearchResult) {
     const wind = window.open(anime.magnet)
     wind?.close()
+  }
+
+  findAnime(anime: Anime) {
+    this.searchAnimeValue = anime.name;
+    this.searchAnime()
+    this.searchAnimeDialog = true;
   }
 }
