@@ -1,9 +1,6 @@
 # Anime Interface
 A local website that allows you to manage anime files you have downloaded onto your computer. Allows you to mark episodes as watched, open the episode and start watching, and delete the episode from your computer. Also let's you keep note of any descriptions you might have of an Anime, as well as when that Anime broadcasts a new episode (if it is still airing).
 
-<img src="https://i.imgur.com/w5VMBfJ.jpg" width=75% height=75%>
-<img src="https://i.imgur.com/hVOxHuQ.jpg" width=50% height=50%>
-
 # How to set up
 
 ## Frontend
@@ -46,13 +43,18 @@ $ python3 main.py
 
 # Modes
 ## Interface Mode
-- Manage files on computer
-- Mark as watched
-- Broadcast day and description
+Manages files on computer
+
+<img src="https://i.imgur.com/WyUzrkG.jpg" width=75% height=75%>
+<img src="https://i.imgur.com/A5locmV.jpg" width=75% height=75%>
+<img src="https://i.imgur.com/hVOxHuQ.jpg" width=50% height=50%>
 
 ## Database Mode
-- Mark as watched
-- Broadcast day and description
+Only keeps track of anime information
+
+<img src="https://i.imgur.com/4ZyIfk0.jpg" width=75% height=75%>
+<img src="https://i.imgur.com/pwEejsG.jpg" width=50% height=50%>
+<img src="https://i.imgur.com/YjVzCEB.jpg" width=50% height=50%>
 
 # .env file
 Create copy of .env-template and rename as ".env". Below are descriptions of all the variables
@@ -65,4 +67,4 @@ Create copy of .env-template and rename as ".env". Below are descriptions of all
 | DB_MODE   | If true, neither of the above values need to be set. Sets system into Database mode rather than Interface mode.
 
 # TODO
-- Ability to add anime when in DB mode
+- Make everything just look nicer overall

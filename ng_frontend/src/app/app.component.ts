@@ -17,8 +17,9 @@ export class AppComponent {
   title: string = "Anime Interface"
 
   addDialog: boolean = false;
+  newAnime: any = {};
+  
   searchAnimeDialog: boolean = false;
-
   searchAnimeValue: string = "";
   searchResults: NyaaSearchResult[] = [];
 
@@ -100,6 +101,7 @@ export class AppComponent {
 
   add() {
     if (this.db_mode) {
+      this.newAnime = {};
       this.addDialog = true;
     }
     else {
@@ -124,5 +126,35 @@ export class AppComponent {
     this.searchAnimeValue = anime.name;
     this.searchAnime()
     this.searchAnimeDialog = true;
+  }
+
+  addAnime() {
+    if (this.newAnime.name == undefined)
+      return
+
+    let newAnime: Anime = {
+      name: this.newAnime.name,
+      description: this.newAnime.description || '',
+      broadcast: this.newAnime.broadcast || '',
+      episodes: [],
+      watched: []
+    }
+
+    if (this.newAnime.episodeCount != null) {
+      for (let i = 1; i <= this.newAnime.episodeCount; i++) {
+        newAnime.episodes.push(i);
+      }
+    }
+    if (this.newAnime.watchedCount != undefined) {
+      for (let i = 1; i <= this.newAnime.watchedCount; i++) {
+        newAnime.watched.push(i);
+      }
+    }
+
+    this.animeApi.postAnime(newAnime).subscribe((r) => {
+      this.addDialog = false;
+      this.newAnime = {};
+      this.getData();
+    })
   }
 }

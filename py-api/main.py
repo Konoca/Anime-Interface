@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from functions.update_anime import update_anime_list, update_anime_watched, update_anime_broadcast, update_anime_description
 from functions.get import find_file, launch_file, get_files
 from functions.delete import delete_file
+from functions.post import add_new_anime
 from functions.search import search
 
 load_dotenv()
@@ -103,7 +104,6 @@ def update_anime_data():
     print(anime_info)
 
     if not anime_name:
-        print('test')
         return jsonify({"Error": "Missing information"})
 
     if episode and (watched == True or watched == False):
@@ -115,6 +115,26 @@ def update_anime_data():
 
     if description or description == '':
         update_anime_description(file_path, anime_name, description)
+
+    anime_dict = update_anime_list(file_path)
+    return jsonify(anime_dict.get(anime_name))
+
+
+@app.route('/anime', methods = ['POST'])
+@cross_origin(supports_credentials=True)
+def add_anime():
+    anime_dict = update_anime_list(file_path)
+
+    anime_info = json.loads(request.data)
+
+    anime_name = anime_info.get('name')
+
+    print(anime_info)
+
+    if not anime_name:
+        return jsonify({"Error": "Missing information"})
+
+    add_new_anime(file_path, anime_info)
 
     anime_dict = update_anime_list(file_path)
     return jsonify(anime_dict.get(anime_name))

@@ -16,7 +16,7 @@
             <th>Description</th>
             <th>Broadcast Day</th>
             <th>Episodes Watched / Downloaded</th>
-            <th style="width:4rem"></th>
+            <th style="width:4rem" *ngIf="!db_mode"></th>
             <th style="width:4rem"></th>
         </tr>
     </ng-template>
@@ -43,7 +43,7 @@
                 </p-cellEditor>
             </td>
             <td>{{anime.watched.length}} / {{anime.episodes.length}}</td>
-            <td>
+            <td *ngIf="!db_mode">
                 <button type="button" class="p-button-rounded" pButton pRipple icon="pi pi-search"
                     (click)="findAnime(anime)"></button>
             </td>
@@ -59,6 +59,7 @@
       </div>
   </ng-template> -->
 </p-table>
+
 
 <p-dialog header="{{selectedAnime.name}}" [(visible)]="displayDialog" [modal]="true" [style]="{width: '50vw'}"
     [draggable]="false" [resizable]="false">
@@ -93,7 +94,6 @@
 
 
 <p-dialog header="Search" [(visible)]="searchAnimeDialog" [modal]="true" [draggable]="false" [resizable]="false">
-
     <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
         <input type="text" pInputText placeholder="Search" [(ngModel)]="searchAnimeValue" />
@@ -131,5 +131,22 @@
 
     <ng-template pTemplate="footer">
         <p-button icon="pi pi-check" (click)="searchAnimeDialog=false" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Add Anime" [(visible)]="addDialog" [modal]="true" [draggable]="false" [resizable]="false" [style]="{width: '75vw'}" >
+    <input type="text" pInputText placeholder="Anime Name" [(ngModel)]="newAnime.name" />
+    <input type="text" pInputText placeholder="Anime Description" [(ngModel)]="newAnime.description" />
+    <input type="text" pInputText placeholder="Broadcast Day" [(ngModel)]="newAnime.broadcast" />
+
+    <br>
+    <p-inputNumber inputId="integeronly" [(ngModel)]="newAnime.episodeCount" placeholder="# of Episodes"></p-inputNumber>
+    <p-inputNumber inputId="integeronly" [(ngModel)]="newAnime.watchedCount" placeholder="# of Episodes Watched"></p-inputNumber>
+    
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-times" (click)="addDialog=false" label="Cancel" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" (click)="addAnime()" label="Add" styleClass="p-button-text"></p-button>
     </ng-template>
 </p-dialog>

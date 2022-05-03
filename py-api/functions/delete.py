@@ -12,11 +12,15 @@ def delete_file(file_path, anime_name, episode):
         with open(file_path, 'r') as f:
             data = json.load(f)
 
+        if (int(episode) in data.get(anime_name).get('episodes')):
+            data.get(anime_name).get('episodes').remove(int(episode))
+        if (int(episode) in data.get(anime_name).get('watched')):
+            data.get(anime_name).get('watched').remove(int(episode))
+
+        if (data.get(anime_name).get('episodes') == []):
+            data.pop(anime_name)
+
         with open(file_path, 'w') as f:
-            if (int(episode) in data.get(anime_name).get('episodes')):
-                data.get(anime_name).get('episodes').remove(int(episode))
-            if (int(episode) in data.get(anime_name).get('watched')):
-                data.get(anime_name).get('watched').remove(int(episode))
             f.write(json.dumps(data, indent = 4))
 
         return True

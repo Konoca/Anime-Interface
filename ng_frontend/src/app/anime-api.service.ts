@@ -33,4 +33,8 @@ export class AnimeApiService {
   searchAnime(data: any) {
     return this.httpClient.put(this.url + '/search', data)
   }
+
+  postAnime(data: any) {
+    return this.httpClient.post(this.url + '/anime', data)
+  }
 }
