@@ -66,3 +66,4 @@ Create copy of .env-template and rename as ".env". Below are descriptions of all
 # TODO
 - Ability to add anime when in DB mode
 - Maybe add a way to store JSON into some external DB, and fetch on startup?
+- Download anime while in Interface Mode
