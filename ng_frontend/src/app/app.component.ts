@@ -40,7 +40,7 @@ export class AppComponent {
     this.animeApi.getMode().subscribe((data: any) => {
       if (data.Mode == 'DB') {
         this.db_mode = true;
-        this.title = "DB Interface"
+        this.title = "Anime Database"
       }
       else {
         this.db_mode = false;
