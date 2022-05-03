@@ -15,7 +15,7 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
-file_path = file_path = f'{dirname(abspath(__file__))}/anime.json'
+file_path = os.getenv('JSON_PATH', default=f'{dirname(abspath(__file__))}/anime.json')
 
 
 @app.route('/watch', methods = ['GET'])
