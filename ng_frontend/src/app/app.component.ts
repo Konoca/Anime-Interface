@@ -42,6 +42,10 @@ export class AppComponent {
         this.db_mode = true;
         this.title = "DB Interface"
       }
+      else {
+        this.db_mode = false;
+        this.title = "Anime Interface"
+      }
     })
   }
 
