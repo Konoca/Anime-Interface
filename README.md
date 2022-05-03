@@ -44,6 +44,16 @@ $ pip install -r requirements.txt
 $ python3 main.py
 ```
 
+# Modes
+## Interface Mode
+- Manage files on computer
+- Mark as watched
+- Broadcast day and description
+
+## Database Mode
+- Mark as watched
+- Broadcast day and description
+
 # .env file
 Create copy of .env-template and rename as ".env". Below are descriptions of all the variables
 
