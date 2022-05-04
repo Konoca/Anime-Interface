@@ -29,7 +29,7 @@ $ ng serve
 4. Enable venv: `/venv/Scripts/activate` (Mac -> `source venv/bin/activate`)
 5. Install dependencies: `pip install -r requirements.txt`
 6. Create .env (look below)
-7. Run backend using: `python main.py`
+7. Run backend using: `python3 main.py`
 
 ### Linux
 ```
