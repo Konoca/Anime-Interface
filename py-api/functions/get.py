@@ -2,11 +2,13 @@ import json
 import os
 import subprocess
 
+
 def find_file(anime_name, episode):
-    file_name = f'{anime_name} - {int(episode):02d}'
-    for file in os.listdir(os.getenv('ANIME_DIR')):
-            if file.startswith(file_name):
-                return f"{os.getenv('ANIME_DIR')}/{file}"
+    for i in range(1, 4):
+        file_name = f'{anime_name} - {int(episode):0{i}d} '
+        for file in os.listdir(os.getenv('ANIME_DIR')):
+                if file.startswith(file_name):
+                    return f"{os.getenv('ANIME_DIR')}/{file}"
     raise Exception('File not found', file_name)
 
 
