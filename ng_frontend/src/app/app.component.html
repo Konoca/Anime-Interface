@@ -1,4 +1,5 @@
-<p-table [value]="rows" responsiveLayout="scroll" dataKey="name" [paginator]="true" [rows]="5"
+
+<p-table #dt1 [value]="rows" responsiveLayout="scroll" dataKey="name" [paginator]="true" [rows]="5"
     (onEditComplete)="onEditComplete($event)">
     <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
@@ -12,7 +13,7 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th>Name</th>
+            <th>Name <p-columnFilter type="text" field="name" display="menu"></p-columnFilter></th>
             <th>Description</th>
             <th>Broadcast Day</th>
             <th>Episodes Watched / Downloaded</th>
@@ -101,7 +102,7 @@
     <p-button icon="pi pi-search" (onClick)="searchAnime()"></p-button>
 
     <p-table [value]="searchResults" dataKey="name" responsiveLayout="scroll" [scrollable]="true" scrollHeight="400px"
-        styleClass="p-datatable-gridlines">
+        styleClass="p-datatable-gridlines" [style]="{width: '75vw'}">
         <ng-template pTemplate="header">
             <tr>
                 <th>Name</th>
