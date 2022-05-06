@@ -41,7 +41,7 @@ $ pip install -r requirements.txt
 $ python3 main.py
 ```
 
-# Modes
+# Modes (pictures not updated)
 ## Interface Mode
 Manages files on computer
 

@@ -124,7 +124,9 @@ export class AppComponent {
 
   downloadAnime(anime: NyaaSearchResult) {
     const wind = window.open(anime.magnet)
-    wind?.close()
+    setTimeout(function(){
+      wind?.close()
+    }, 1000);
   }
 
   findAnime(anime: Anime) {
