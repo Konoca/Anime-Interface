@@ -15,6 +15,8 @@ import { DialogModule } from 'primeng/dialog';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms'
 import { InputNumberModule } from 'primeng/inputnumber';
+import { FilterService } from 'primeng/api';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -32,9 +34,12 @@ import { InputNumberModule } from 'primeng/inputnumber';
     DialogModule,
     CheckboxModule,
     FormsModule,
-    InputNumberModule
+    InputNumberModule,
+    PaginatorModule
   ],
-  providers: [],
+  providers: [
+    FilterService
+  ],
   bootstrap: [
     AppComponent
   ]

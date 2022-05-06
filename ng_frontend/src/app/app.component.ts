@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Table } from 'primeng/table';
 import { Anime, NyaaSearchResult, UpdateAnimeData, UpdateAnimeEpData } from './anime';
 import { AnimeApiService } from './anime-api.service';
 
@@ -22,6 +23,9 @@ export class AppComponent {
   searchAnimeDialog: boolean = false;
   searchAnimeValue: string = "";
   searchResults: NyaaSearchResult[] = [];
+
+  @ViewChild('dt') dt: any;
+  @ViewChild('dt2') dt2: any;
 
   constructor(
     private animeApi: AnimeApiService
@@ -64,6 +68,7 @@ export class AppComponent {
   selectAnime(anime: Anime) {
     this.selectedAnime = anime;
     this.displayDialog = true;
+    this.dt2.first = 0
   }
 
   isEpWatched(ep: any) {
@@ -156,5 +161,11 @@ export class AppComponent {
       this.newAnime = {};
       this.getData();
     })
+  }
+
+  applyFilterGlobal($event: any, stringVal: any) {
+    console.log($event.target.value)
+    console.log(stringVal)
+    this.dt!.filterGlobal($event.target.value, stringVal);
   }
 }

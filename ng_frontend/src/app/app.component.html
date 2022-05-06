@@ -1,24 +1,35 @@
+<h1 class="pageTitle">{{title}}</h1>
 
-<p-table #dt1 [value]="rows" responsiveLayout="scroll" dataKey="name" [paginator]="true" [rows]="5"
-    (onEditComplete)="onEditComplete($event)">
+<p-table #dt [value]="rows" responsiveLayout="scroll" dataKey="name" [scrollable]="true" scrollHeight="500px"
+    (onEditComplete)="onEditComplete($event)" [globalFilterFields]="['name']" [paginator]="true" [rows]="5">
     <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
-            <h1>{{title}}</h1>
-            <span class="p-buttonset">
-                <p-button icon="pi pi-plus" (onClick)="add()"></p-button>
-                <p-button icon="pi pi-refresh" (onClick)="refresh()"></p-button>
-            </span>
+            <div class="p-toolbar-group-left">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input
+                        pInputText
+                        type="text"
+                        (input)="applyFilterGlobal($event, 'contains')"
+                        placeholder="Filter"
+                    />
+                </span>
+            </div>
 
+            <span class="p-toolbar-group-right">
+                <p-button icon="pi pi-search" (onClick)="add()" class="mr-2"></p-button>
+                <p-button icon="pi pi-refresh" (onClick)="refresh()" class="mr-2"></p-button>
+            </span>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th>Name <p-columnFilter type="text" field="name" display="menu"></p-columnFilter></th>
+            <th>Name</th>
             <th>Description</th>
             <th>Broadcast Day</th>
             <th>Episodes Watched / Downloaded</th>
-            <th style="width:4rem" *ngIf="!db_mode"></th>
-            <th style="width:4rem"></th>
+            <th *ngIf="!db_mode">Download</th>
+            <th>View</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-anime>
@@ -54,17 +65,12 @@
             </td>
         </tr>
     </ng-template>
-    <!-- <ng-template pTemplate="summary">
-      <div class="flex align-items-center justify-content-between">
-          In total there are {{rows ? rows.length : 0 }} anime downloaded.
-      </div>
-  </ng-template> -->
 </p-table>
 
 
 <p-dialog header="{{selectedAnime.name}}" [(visible)]="displayDialog" [modal]="true" [style]="{width: '50vw'}"
     [draggable]="false" [resizable]="false">
-    <p-table [value]="selectedAnime.episodes" responsiveLayout="scroll" dataKey="name">
+    <p-table #dt2 [value]="selectedAnime.episodes" dataKey="name" [paginator]="true" [rows]="6">
         <ng-template pTemplate="header">
             <tr>
                 <th>Episode</th>
