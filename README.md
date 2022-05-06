@@ -68,3 +68,4 @@ Create copy of .env-template and rename as ".env". Below are descriptions of all
 
 # TODO
 - Make everything just look nicer overall
+- Add pagination to anime search/download
