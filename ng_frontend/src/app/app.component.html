@@ -55,8 +55,8 @@
                 </p-cellEditor>
             </td>
             <td>{{anime.watched.length}} / {{anime.episodes.length}}</td>
-            <td *ngIf="!db_mode">
-                <button type="button" class="p-button-success p-button-rounded mr-2" pButton pRipple icon="pi pi-search"
+            <td>
+                <button *ngIf="!db_mode" type="button" class="p-button-success p-button-rounded mr-2" pButton pRipple icon="pi pi-search"
                     (click)="findAnime(anime)"></button>
             <!-- </td>
             <td> -->
