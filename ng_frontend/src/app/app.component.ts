@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { Table } from 'primeng/table';
 import { Anime, NyaaSearchResult, UpdateAnimeData, UpdateAnimeEpData } from './anime';
 import { AnimeApiService } from './anime-api.service';
 
@@ -166,8 +165,6 @@ export class AppComponent {
   }
 
   applyFilterGlobal($event: any, stringVal: any) {
-    console.log($event.target.value)
-    console.log(stringVal)
     this.dt!.filterGlobal($event.target.value, stringVal);
   }
 }

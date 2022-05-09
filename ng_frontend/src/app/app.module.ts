@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table'
 import { DataViewModule } from 'primeng/dataview'
 import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -30,6 +31,7 @@ import { PaginatorModule } from 'primeng/paginator';
     TableModule,
     DataViewModule,
     ButtonModule,
+    RippleModule,
     InputTextModule,
     DialogModule,
     CheckboxModule,

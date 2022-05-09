@@ -1,7 +1,7 @@
 <h1 class="pageTitle">{{title}}</h1>
 
 <p-table #dt [value]="rows" responsiveLayout="scroll" dataKey="name" [scrollable]="true" scrollHeight="500px"
-    (onEditComplete)="onEditComplete($event)" [globalFilterFields]="['name']" [paginator]="true" [rows]="5">
+    (onEditComplete)="onEditComplete($event)" [globalFilterFields]="['name', 'description']" [paginator]="true" [rows]="5">
     <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
             <div class="p-toolbar-group-left">
@@ -17,8 +17,8 @@
             </div>
 
             <span class="p-toolbar-group-right">
-                <p-button icon="pi pi-search" (onClick)="add()" class="mr-2"></p-button>
-                <p-button icon="pi pi-refresh" (onClick)="refresh()" class="mr-2"></p-button>
+                <p-button icon="pi pi-plus" (onClick)="add()" class="p-button-success p-button-rounded mr-2"></p-button>
+                <p-button icon="pi pi-refresh" (onClick)="refresh()" class="p-button-rounded mr-2"></p-button>
             </span>
         </div>
     </ng-template>
@@ -28,8 +28,8 @@
             <th>Description</th>
             <th>Broadcast Day</th>
             <th>Episodes Watched / Downloaded</th>
-            <th *ngIf="!db_mode">Download</th>
-            <th>View</th>
+            <!-- <th *ngIf="!db_mode">Download</th> -->
+            <th></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-anime>
@@ -56,11 +56,11 @@
             </td>
             <td>{{anime.watched.length}} / {{anime.episodes.length}}</td>
             <td *ngIf="!db_mode">
-                <button type="button" class="p-button-rounded" pButton pRipple icon="pi pi-search"
+                <button type="button" class="p-button-success p-button-rounded mr-2" pButton pRipple icon="pi pi-search"
                     (click)="findAnime(anime)"></button>
-            </td>
-            <td>
-                <button type="button" class="p-button-rounded" pButton pRipple icon="pi pi-list"
+            <!-- </td>
+            <td> -->
+                <button type="button" class="p-button-rounded mr-2" pButton pRipple icon="pi pi-list"
                     (click)="selectAnime(anime)"></button>
             </td>
         </tr>
