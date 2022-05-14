@@ -4,6 +4,7 @@ A local website that allows you to manage anime files you have downloaded onto y
 # Prerequisites
 - Docker
 - WSL2 (if using Windows)
+- watchexec (if using mac/linux)
 - Create a JSON file called "anime.json"
 
 # How to run (Windows)
@@ -22,10 +23,11 @@ At path\to\watch_file.ps1:8 char:30
     + FullyQualifiedErrorId : ParameterArgumentValidationErrorNullNotAllowed,Microsoft.PowerShell.Commands.InvokeItemCommand
 ```
 
-# How to run (Mac/Linux) [DB Mode only]
+# How to run (Mac/Linux) [Interface mode not yet made for Linux]
 Create .env file using the template below, then run the following commands inside project folder:
 ```
 docker-compose up -d --build --force-rebuild
+./watch_file.sh
 ```
 
 # .env file
