@@ -16,7 +16,8 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
-file_path = os.getenv('JSON_PATH', default=f'{dirname(abspath(__file__))}/anime.json')
+# file_path = os.getenv('JSON_PATH', default=f'{dirname(abspath(__file__))}/anime.json')
+file_path = '/anime_data/anime.json'
 
 
 @app.route('/watch', methods = ['GET'])
@@ -141,5 +142,5 @@ def add_anime():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(host='0.0.0.0', debug=True, port=8000)
     update_anime_list(file_path)
