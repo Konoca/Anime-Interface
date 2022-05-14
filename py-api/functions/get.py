@@ -6,17 +6,21 @@ import subprocess
 def find_file(anime_name, episode):
     for i in range(1, 4):
         file_name = f'{anime_name} - {int(episode):0{i}d} '
-        for file in os.listdir(os.getenv('ANIME_DIR')):
+        for file in os.listdir('/anime'):
                 if file.startswith(file_name):
-                    return f"{os.getenv('ANIME_DIR')}/{file}"
+                    return f"{os.getenv('ANIME_DIR_ON_COMPUTER')}/{file}"
     raise Exception('File not found', file_name)
 
 
 def launch_file(file_path, anime_name, episode):
     try:
-        anime = find_file(anime_name, episode)
+        anime_path = find_file(anime_name, episode)
         
-        subprocess.Popen([os.getenv('VLC_PATH'), f'\\{anime}'])
+        # subprocess.Popen([os.getenv('VLC_PATH'), f'\\{anime}'])
+
+        with open('/pipe/file.txt', 'w') as f:
+            f.write(anime_path)
+
         return True
     except Exception as e:
         print(e)

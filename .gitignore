@@ -1,4 +1,1 @@
-# Scripts to start on windows
-backend.ps1
-frontend.ps1
-start.ps1
+.env

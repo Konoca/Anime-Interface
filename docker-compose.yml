@@ -1,0 +1,23 @@
+services:
+  frontend:
+    container_name: frontend-container
+    restart: always
+    build: ./ng_frontend
+    ports: 
+      - "4200:4200/udp"
+      - "4200:4200/tcp"
+    depends_on:
+      - backend
+  backend:
+    container_name: backend-container
+    restart: always
+    build: ./py-api
+    ports:
+      - "8000:8000/udp"
+      - "8000:8000/tcp"
+    volumes:
+      - ${JSON_PATH_ON_COMPUTER}:/anime_data
+      - ${ANIME_DIR_ON_COMPUTER}:/anime
+      - ./pipe:/pipe
+    env_file:
+      - .env
