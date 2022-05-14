@@ -4,6 +4,7 @@ A local website that allows you to manage anime files you have downloaded onto y
 # Prerequisites
 - Docker
 - WSL2 (if using Windows)
+- Create a JSON file called "anime.json"
 
 # How to run (Windows)
 Create .env file using the template below, then run the following commands inside project folder:
