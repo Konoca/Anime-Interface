@@ -22,7 +22,7 @@ At path\to\watch_file.ps1:8 char:30
     + FullyQualifiedErrorId : ParameterArgumentValidationErrorNullNotAllowed,Microsoft.PowerShell.Commands.InvokeItemCommand
 ```
 
-# How to run (Mac/Linux)
+# How to run (Mac/Linux) [DB Mode only]
 Create .env file using the template below, then run the following commands inside project folder:
 ```
 docker-compose up -d --build
