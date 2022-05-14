@@ -9,7 +9,7 @@ A local website that allows you to manage anime files you have downloaded onto y
 # How to run (Windows)
 Create .env file using the template below, then run the following commands inside project folder:
 ```
-docker-compose up -d --build
+docker-compose up -d --build --force-rebuild
 ./watch_file.ps1
 ```
 Keep in mind, this error will always appear when running the file. It can be safely ignored:
@@ -25,7 +25,7 @@ At path\to\watch_file.ps1:8 char:30
 # How to run (Mac/Linux) [DB Mode only]
 Create .env file using the template below, then run the following commands inside project folder:
 ```
-docker-compose up -d --build
+docker-compose up -d --build --force-rebuild
 ```
 
 # .env file

@@ -28,7 +28,7 @@ def launch_file(file_path, anime_name, episode):
 
 
 def get_files(file_path):
-    dir_list = os.listdir(os.getenv('ANIME_DIR'))
+    dir_list = os.listdir('/anime')
     new = {}
 
     for item in dir_list:
