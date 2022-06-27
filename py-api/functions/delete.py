@@ -1,12 +1,13 @@
 import json
 import os
+import logging
 
 from functions.get import find_file
 
 def delete_file(file_path, anime_name, episode):
     try:
         if os.getenv('DB_MODE').lower() == 'false':
-            file = find_file(anime_name, episode)
+            file = find_file(anime_name, episode, path="/anime")
             os.remove(file)
 
         with open(file_path, 'r') as f:
@@ -25,5 +26,5 @@ def delete_file(file_path, anime_name, episode):
 
         return True
     except Exception as e:
-        print(e)
+        logging.debug(e)
         return False

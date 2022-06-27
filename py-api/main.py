@@ -4,6 +4,7 @@ import json
 import os
 from os.path import abspath, dirname
 from dotenv import load_dotenv
+import logging
 
 from functions.update_anime import update_anime_list, update_anime_watched, update_anime_broadcast, update_anime_description
 from functions.get import find_file, launch_file, get_files
@@ -12,6 +13,7 @@ from functions.post import add_new_anime
 from functions.search import search
 
 load_dotenv()
+logging.basicConfig(filename="error.log", level=logging.DEBUG)
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
