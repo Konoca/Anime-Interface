@@ -11,7 +11,7 @@ Create .env file using the template below, then run the following commands insid
 ```
 docker-compose up -d --build --force-rebuild
 ```
-Afterwards, open up an Ubuntu terminal, navigate to where the code is located (mnt/<drive>/<path>) and type(will have to be repeated every time you turn on your computer):
+Afterwards, open up an Ubuntu terminal, navigate to where the code is located (mnt/[drive]/[path]) and type(will have to be repeated every time you turn on your computer):
 ```
 ./pipe.sh &
 disown
