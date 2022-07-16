@@ -1,14 +1,14 @@
-#!/bin/sh
 pipe_file_path="$(pwd)/pipe/file.txt"
 
-# watchexec -w ./pipe -e txt "if [[ -s $pipe_file_path ]]; then cat $pipe_file_path | xargs -I {} open \"{}\"; printf "" > $pipe_file_path; else echo 'File empty'; fi"
-
+printf "" > $pipe_file_path
 while true
 do
 	if [[ -s $pipe_file_path ]];
 	then
 		if [[ "$OSTYPE" == "darwin"* ]]; then
 			command='open'
+		elif [ $(uname -r | sed -n 's/.*\( *Microsoft *\).*/\1/ip') ]; then
+			command='wslview'
 		else
 			command='xdg-open'
 		fi

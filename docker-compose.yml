@@ -16,8 +16,7 @@ services:
       - "8000:8000/udp"
       - "8000:8000/tcp"
     volumes:
-      - ${JSON_PATH_ON_COMPUTER}:/anime_data
-      - ${ANIME_DIR_ON_COMPUTER}:/anime
+      - ${ANIME_DIR}:/anime
       - ./pipe:/pipe
     env_file:
       - .env

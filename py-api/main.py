@@ -18,8 +18,7 @@ logging.basicConfig(filename="error.log", level=logging.DEBUG)
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
-# file_path = os.getenv('JSON_PATH', default=f'{dirname(abspath(__file__))}/anime.json')
-file_path = '/anime_data/anime.json'
+file_path = '/anime/anime.json'
 
 
 @app.route('/watch', methods = ['GET'])

@@ -1,9 +1,8 @@
 import json
 import os
-import subprocess
 
 
-def find_file(anime_name, episode, path=os.getenv('ANIME_DIR_ON_COMPUTER')):
+def find_file(anime_name, episode, path=os.getenv('ANIME_DIR')):
     for i in range(1, 4):
         file_name = f'{anime_name} - {int(episode):0{i}d} '
         for file in os.listdir('/anime'):
@@ -15,15 +14,13 @@ def find_file(anime_name, episode, path=os.getenv('ANIME_DIR_ON_COMPUTER')):
 def launch_file(file_path, anime_name, episode):
     try:
         anime_path = find_file(anime_name, episode)
-        
-        # subprocess.Popen([os.getenv('VLC_PATH'), f'\\{anime}'])
 
         with open('/pipe/file.txt', 'w') as f:
             f.write(anime_path)
 
         return True
     except Exception as e:
-        print(e)
+        print(e, flush=True)
         return False
 
 
@@ -32,6 +29,9 @@ def get_files(file_path):
     new = {}
 
     for item in dir_list:
+        if item == 'anime.json':
+            continue
+
         split = item.rsplit('-', 1)
         anime_name = split[0].rstrip()
 
