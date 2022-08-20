@@ -66,4 +66,7 @@ def get_files(file_path):
             new[anime_name]['broadcast'] = ''
             new[anime_name]['description'] = ''
 
+    for k,v in new.items():
+        new[k]['episodes'] = sorted(new[k]['episodes'])
+
     return new
