@@ -22,9 +22,9 @@ You can close both Powershell and Ubuntu afterwards.
 Create .env file using the template below, then run the following commands inside project folder:
 ```
 docker-compose up -d --build --force-rebuild
-./pipe.sh & ; disown
+./pipe.sh & disown $!
 ```
-'```./pipe.sh & ; disown```' will need to be retyped after machine restarts
+`./pipe.sh & disown $!` will need to be retyped after machine restarts
 
 # .env file
 Create copy of .env-template and rename as ".env". Below are descriptions of all the variables
@@ -32,7 +32,7 @@ Create copy of .env-template and rename as ".env". Below are descriptions of all
 | Key | Description |
 |:--- |:----------- |
 | ANIME_DIR | Directory to where all Anime files on computer are stored.
-| DB_MODE  | Sets system into Database mode rather than Interface mode. If true, ANIME_DIR_ON_COMPUTER does not need to be set.
+| DB_MODE  | Sets system into Database mode rather than Interface mode.
 
 # Modes (pictures not updated)
 ## Interface Mode
