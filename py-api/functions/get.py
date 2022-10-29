@@ -29,7 +29,7 @@ def get_files(file_path):
     new = {}
 
     for item in dir_list:
-        if item == 'anime.json':
+        if item == 'anime.json' or item[:1] == '.':
             continue
 
         split = item.rsplit('-', 1)
