@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Anime, NyaaSearchResult, UpdateAnimeData, UpdateAnimeEpData } from './anime';
 import { AnimeApiService } from './anime-api.service';
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,8 @@ export class AppComponent {
   @ViewChild('dt2') dt2: any;
 
   constructor(
-    private animeApi: AnimeApiService
+    private animeApi: AnimeApiService,
+    private clipboardApi: ClipboardService
   ) { }
 
   ngOnInit() {
@@ -126,6 +128,10 @@ export class AppComponent {
     setTimeout(function(){
       wind?.close()
     }, 1000);
+  }
+
+  copyAnime(anime: NyaaSearchResult) {
+    this.clipboardApi.copyFromContent(anime.magnet);
   }
 
   findAnime(anime: Anime) {

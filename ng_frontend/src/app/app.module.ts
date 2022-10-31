@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { ClipboardModule } from 'ngx-clipboard';
+
 import { TableModule } from 'primeng/table'
 import { DataViewModule } from 'primeng/dataview'
 import { ButtonModule } from 'primeng/button';
@@ -37,7 +39,8 @@ import { PaginatorModule } from 'primeng/paginator';
     CheckboxModule,
     FormsModule,
     InputNumberModule,
-    PaginatorModule
+    PaginatorModule,
+    ClipboardModule
   ],
   providers: [
     FilterService

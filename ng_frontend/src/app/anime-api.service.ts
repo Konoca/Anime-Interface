@@ -9,6 +9,7 @@ export class AnimeApiService {
   constructor(private httpClient: HttpClient) { }
 
   url = 'http://127.0.0.1:8000'
+  url2 = 'http://192.168.1.84:8008'
 
   getAnime() {
     return this.httpClient.get(this.url + '/anime');
@@ -31,7 +32,7 @@ export class AnimeApiService {
   }
 
   searchAnime(data: any) {
-    return this.httpClient.put(this.url + '/search', data)
+    return this.httpClient.put(this.url2 + '/search', data)
   }
 
   postAnime(data: any) {
