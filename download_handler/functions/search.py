@@ -1,4 +1,5 @@
 from NyaaPy import nyaa
+from subprocess import call
 
 def search(query: str):
     nyaa_search = nyaa.Nyaa()
@@ -21,3 +22,8 @@ def search(query: str):
         })
 
     return new_results
+
+
+def download(url: str):
+    call(['qbittorrent-nox', url])
+

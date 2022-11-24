@@ -124,10 +124,11 @@ export class AppComponent {
   }
 
   downloadAnime(anime: NyaaSearchResult) {
-    const wind = window.open(anime.magnet)
-    setTimeout(function(){
-      wind?.close()
-    }, 1000);
+    //const wind = window.open(anime.magnet)
+    //setTimeout(function(){
+    //  wind?.close()
+    //}, 1000);
+    this.animeApi.downloadAnime({url: anime.magnet}).subscribe((r: any) => { this.getData(); });
   }
 
   copyAnime(anime: NyaaSearchResult) {

@@ -38,4 +38,8 @@ export class AnimeApiService {
   postAnime(data: any) {
     return this.httpClient.post(this.url + '/anime', data)
   }
+
+  downloadAnime(data: any) {
+    return this.httpClient.put(this.url2 + '/download', data)
+  }
 }

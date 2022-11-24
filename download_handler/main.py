@@ -4,7 +4,7 @@ import json
 from dotenv import load_dotenv
 import logging
 
-from functions.search import search
+from functions.search import download, search
 
 load_dotenv()
 logging.basicConfig(filename="error.log", level=logging.DEBUG)
@@ -20,6 +20,15 @@ def search_anime():
     query = data.get('query')
     results = search(query)
     return jsonify(results)
+
+
+@app.route('/download', methods = ['PUT'])
+@cross_origin(supports_credentials=True)
+def download_anime():
+    data = json.loads(request.data)
+    url = data.get('url')
+    download(url)
+    return jsonify({"msg": "Download started"})
 
 
 if __name__ == '__main__':

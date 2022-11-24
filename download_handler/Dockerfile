@@ -1,10 +1,10 @@
-FROM python:latest
+FROM linuxserver/qbittorrent
+
+RUN apk update
+RUN apk add python3
 
 ADD . .
 
 RUN pip install -r requirements.txt
 
 CMD python3 ./main.py
-
-EXPOSE 8008/tcp
-EXPOSE 8008/udp
